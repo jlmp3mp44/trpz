@@ -1,20 +1,22 @@
-package com.generator_installer.project.state;
+package com.generator_installer.project.server.state;
 
 import com.generator_installer.project.entity.File;
 import com.generator_installer.project.entity.InstallerGenerator;
 import com.generator_installer.project.entity.User;
 import java.util.List;
 
-public class ReadyState implements InstallerState {
+public class InitialState implements InstallerState {
     private final InstallerGenerator installer;
 
-    public ReadyState(InstallerGenerator installer) {
+    public InitialState(InstallerGenerator installer) {
         this.installer = installer;
     }
 
     @Override
     public String initializeInstaller(User user) {
-        return "Installer already initialized";
+        installer.setUser(user);
+        installer.setState(new FileSelectionState(installer));
+        return "Installer initialized, ready for file selection";
     }
 
     @Override
@@ -24,19 +26,15 @@ public class ReadyState implements InstallerState {
 
     @Override
     public void configure(String shortcutOption, String licenseKey, List<String> options) {
-        // Can reconfigure if needed
-        installer.setShortcut(shortcutOption);
-        installer.setInstallationOption(String.join(",", options));
     }
 
     @Override
     public String generateInstaller() {
-        // Here would be the actual logic to generate the installer
-        return "Generating installer with configuration: " + installer.getInstallationOption();
+        return "Cannot generate installer in initial state";
     }
 
     @Override
     public String getStateName() {
-        return "Ready State";
+        return "Initial State";
     }
 }

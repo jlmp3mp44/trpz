@@ -1,4 +1,4 @@
-package com.generator_installer.project.state;
+package com.generator_installer.project.server.state;
 
 import com.generator_installer.project.entity.File;
 import com.generator_installer.project.entity.InstallerGenerator;
@@ -32,7 +32,6 @@ public class FileSelectionState implements InstallerState {
 
     @Override
     public void configure(String shortcutOption, String licenseKey, List<String> options) {
-        // Not allowed in this state
     }
 
     @Override

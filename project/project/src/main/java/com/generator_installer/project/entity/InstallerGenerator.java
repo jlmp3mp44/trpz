@@ -1,7 +1,7 @@
 package com.generator_installer.project.entity;
 
-import com.generator_installer.project.state.InitialState;
-import com.generator_installer.project.state.InstallerState;
+import com.generator_installer.project.server.state.InitialState;
+import com.generator_installer.project.server.state.InstallerState;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,9 +15,6 @@ import lombok.Data;
 
 import java.util.List;
 
-/**
- * InstallerGenerator entity
- */
 @Entity
 @Data
 @Table(name = "installers_generator")
