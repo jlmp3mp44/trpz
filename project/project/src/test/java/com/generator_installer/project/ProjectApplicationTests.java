@@ -1,6 +1,6 @@
 package com.generator_installer.project;
 
-import com.generator_installer.project.entity.AdditionalFiles;
+import com.generator_installer.project.server.entity.AdditionalFiles;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;

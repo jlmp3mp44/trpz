@@ -1,7 +1,7 @@
 package com.generator_installer.project.server.state;
 
-import com.generator_installer.project.entity.File;
-import com.generator_installer.project.entity.User;
+import com.generator_installer.project.server.entity.File;
+import com.generator_installer.project.server.entity.User;
 
 import java.util.List;
 
@@ -11,6 +11,6 @@ public interface InstallerState {
     void configure(String shortcutOption, String licenseKey, List<String> options);
     String generateInstaller();
     String getStateName();
-    void generateFiles();
-    void uninstall();
+    String generateFiles();
+    String uninstall();
 }

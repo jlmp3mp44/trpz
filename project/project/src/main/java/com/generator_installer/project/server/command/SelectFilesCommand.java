@@ -2,7 +2,7 @@ package com.generator_installer.project.server.command;
 
 
 
-import com.generator_installer.project.entity.File;
+import com.generator_installer.project.server.entity.File;
 import com.generator_installer.project.server.state.InstallerState;
 import java.util.List;
 import java.io.PrintWriter;

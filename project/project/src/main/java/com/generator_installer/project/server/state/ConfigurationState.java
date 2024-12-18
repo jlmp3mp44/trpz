@@ -1,8 +1,8 @@
 package com.generator_installer.project.server.state;
 
-import com.generator_installer.project.entity.File;
-import com.generator_installer.project.entity.InstallerGenerator;
-import com.generator_installer.project.entity.User;
+import com.generator_installer.project.server.entity.File;
+import com.generator_installer.project.server.entity.InstallerGenerator;
+import com.generator_installer.project.server.entity.User;
 import java.util.List;
 
 public class ConfigurationState implements InstallerState {
@@ -37,5 +37,15 @@ public class ConfigurationState implements InstallerState {
     @Override
     public String getStateName() {
         return "Configuration State";
+    }
+
+    @Override
+    public String generateFiles() {
+        return null;
+    }
+
+    @Override
+    public String uninstall() {
+        return null;
     }
 }
