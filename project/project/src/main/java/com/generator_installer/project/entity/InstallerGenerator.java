@@ -56,7 +56,6 @@ public class InstallerGenerator {
     return state.getStateName();
   }
 
-  // Delegate methods to state
   public String initializeInstaller(User user) {
     return state.initializeInstaller(user);
   }
