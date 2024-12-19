@@ -10,8 +10,8 @@ public class AdditionalFilesServiceImpl implements AdditionalFilesService {
 
     private final AdditionalFilesRepository additionalFilesRepository;
 
-    public AdditionalFilesServiceImpl(AdditionalFilesRepository additionalFilesRepository) {
-        this.additionalFilesRepository = additionalFilesRepository;
+    public AdditionalFilesServiceImpl() {
+        this.additionalFilesRepository = new AdditionalFilesRepository();
     }
 
     @Override

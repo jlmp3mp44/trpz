@@ -8,8 +8,8 @@ public class DocumentationServiceImpl implements DocumentationService {
 
     private final DocumentationRepository documentationRepository;
 
-    public DocumentationServiceImpl(DocumentationRepository documentationRepository) {
-        this.documentationRepository = documentationRepository;
+    public DocumentationServiceImpl() {
+        this.documentationRepository = new DocumentationRepository();
     }
 
     @Override

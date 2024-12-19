@@ -3,6 +3,7 @@ package com.generator_installer.project.server.service.implementation;
 import com.generator_installer.project.server.entity.File;
 import com.generator_installer.project.server.entity.InstallerGenerator;
 import com.generator_installer.project.server.entity.User;
+import com.generator_installer.project.server.repository.FileRepository;
 import com.generator_installer.project.server.repository.InstallerGeneratorRepository;
 import com.generator_installer.project.server.service.FileService;
 import com.generator_installer.project.server.service.InstallerGeneratorService;
@@ -14,10 +15,9 @@ public class InstallerGeneratorServiceImpl implements InstallerGeneratorService 
     private final FileService fileService;
     private InstallerGenerator currentInstaller;
 
-    public InstallerGeneratorServiceImpl(InstallerGeneratorRepository installerGeneratorRepository,
-                                       FileService fileService) {
-        this.installerGeneratorRepository = installerGeneratorRepository;
-        this.fileService = fileService;
+    public InstallerGeneratorServiceImpl() {
+        this.installerGeneratorRepository = new InstallerGeneratorRepository();
+        this.fileService = new FileServiceImpl();
     }
 
     // Scenario 1: Creating an Installation Package

@@ -1,6 +1,7 @@
 package com.generator_installer.project.server.repository;
 
 import com.generator_installer.project.server.entity.File;
+import java.util.Optional;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
@@ -46,9 +47,10 @@ public class FileRepository {
     }
   }
 
-  public File findById(int id) {
+  public Optional<File> findById(int id) {
     try (Session session = openSession()) {
-      return session.get(File.class, id); // Повертає об'єкт File або null
+      File file = session.get(File.class, id);
+      return Optional.ofNullable(file);
     }
   }
 
@@ -89,6 +91,19 @@ public class FileRepository {
           .uniqueResult(); // Returns a single file or null
     }
   }
+
+  public List<File> getByFileNames(List<String> fileNames) {
+    try (Session session = openSession()) {
+      // Створюємо HQL запит для вибірки кількох файлів
+      String hql = "FROM File WHERE fileName IN :fileNames";
+
+      // Повертаємо список файлів, що відповідають іменам
+      return session.createQuery(hql, File.class)
+          .setParameter("fileNames", fileNames)
+          .list(); // Повертає список файлів
+    }
+  }
+
 
   // Delete a file
   public void delete(File file) {

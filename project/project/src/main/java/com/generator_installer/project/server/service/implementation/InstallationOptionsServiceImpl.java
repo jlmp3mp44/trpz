@@ -12,8 +12,8 @@ public class InstallationOptionsServiceImpl implements InstallationOptionsServic
 
     private final InstallationOptionsRepository installationOptionsRepository;
 
-    public InstallationOptionsServiceImpl(InstallationOptionsRepository installationOptionsRepository) {
-        this.installationOptionsRepository = installationOptionsRepository;
+    public InstallationOptionsServiceImpl() {
+        this.installationOptionsRepository = new InstallationOptionsRepository();
     }
 
     @Override

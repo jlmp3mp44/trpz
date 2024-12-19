@@ -9,8 +9,8 @@ public class FileServiceImpl implements FileService {
 
     private final FileRepository fileRepository;
 
-    public FileServiceImpl(FileRepository fileRepository) {
-        this.fileRepository = fileRepository;
+    public FileServiceImpl() {
+        this.fileRepository = new FileRepository();
     }
 
     @Override
@@ -20,13 +20,18 @@ public class FileServiceImpl implements FileService {
 
     @Override
     public File getFileById(Integer id) {
-        return fileRepository.findById(id.longValue())
-                .orElseThrow(() -> new RuntimeException("File not found with id: " + id));
+        return fileRepository.findById(id.intValue())  // This returns Optional<File>
+            .orElseThrow(() -> new RuntimeException("File not found with id: " + id));
     }
 
     @Override
     public File getFileByName(String fileName) {
         return fileRepository.getByFileName(fileName);
+    }
+
+    @Override
+    public List<File> getFileByNames(List<String> fileNames) {
+        return fileRepository.getByFileNames(fileNames);
     }
 
     @Override

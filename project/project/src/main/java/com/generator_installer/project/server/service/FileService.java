@@ -11,6 +11,8 @@ public interface FileService {
 
   File getFileByName(String fileName);
 
+  List<File> getFileByNames(List<String> fileNames);
+
   List<File> getAllFiles();
 
   File updateFile(Integer id, File fileDetails);
