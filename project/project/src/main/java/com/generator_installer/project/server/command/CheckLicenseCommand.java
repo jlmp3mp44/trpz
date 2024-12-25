@@ -17,10 +17,8 @@ public class CheckLicenseCommand implements Command {
 
   @Override
   public void execute() {
-    // Перевірка ліцензії через сервіс
     boolean isLicenseValid = documentationService.checkLicense(licenseKey);
 
-    // Виведення результату перевірки
     if (isLicenseValid) {
       out.println("License is valid.");
     } else {

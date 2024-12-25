@@ -1,10 +1,8 @@
 package com.generator_installer.project.server.factory;
 
-class ExeInstallerCreator extends InstallerCreator {
+public class ExeInstallerFactory extends InstallerFactory {
   @Override
-  InstallerPackage factoryMethod() {
+  public Installer createInstaller() {
     return new ExeInstaller();
   }
 }
-
-

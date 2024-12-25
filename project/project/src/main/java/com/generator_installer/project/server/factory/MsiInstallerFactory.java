@@ -1,8 +1,8 @@
 package com.generator_installer.project.server.factory;
 
-class MsiInstallerCreator extends InstallerCreator {
+public class MsiInstallerFactory extends InstallerFactory {
   @Override
-  InstallerPackage factoryMethod() {
+  public Installer createInstaller() {
     return new MsiInstaller();
   }
 }

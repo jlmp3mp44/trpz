@@ -1,37 +1,57 @@
 package com.generator_installer.project.server.factory;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
+import java.io.*;
 
-class MsiInstaller implements InstallerPackage {
-    private String sourceDir;
-    private String targetDir;
+public class MsiInstaller implements Installer {
 
-    public MsiInstaller(String sourceDir, String targetDir) {
-        this.sourceDir = sourceDir;
-        this.targetDir = targetDir;
-    }
+  private String sourceDirectory;
+  private String outputFilePath;
 
-    public void configureFiles() {
-        System.out.println("Configuring files for .msi installer.");
-        try {
-            Files.copy(Path.of(sourceDir, "myapp.msi"), Path.of(targetDir, "myapp.msi"));
-            System.out.println("Files copied from " + sourceDir + " to " + targetDir);
-        } catch (IOException e) {
-            System.out.println("Error configuring files: " + e.getMessage());
+  public MsiInstaller(String sourceDirectory, String outputFilePath) {
+    this.sourceDirectory = sourceDirectory;
+    this.outputFilePath = outputFilePath;
+  }
+
+  @Override
+  public void createInstaller() {
+    System.out.println("Generating MSI installer...");
+    try {
+      // Використання WiX Toolset для створення MSI файлу
+      ProcessBuilder processBuilder = new ProcessBuilder(
+          "candle", "-out", "installer.wixobj", "installer.wxs"
+      );
+      processBuilder.redirectErrorStream(true);
+      Process process = processBuilder.start();
+      try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
+        String line;
+        while ((line = reader.readLine()) != null) {
+          System.out.println(line);
         }
+      }
+      int exitCode = process.waitFor();
+      if (exitCode == 0) {
+        ProcessBuilder linker = new ProcessBuilder(
+            "light", "-out", outputFilePath, "installer.wixobj"
+        );
+        linker.redirectErrorStream(true);
+        Process linkProcess = linker.start();
+        try (BufferedReader linkReader = new BufferedReader(new InputStreamReader(linkProcess.getInputStream()))) {
+          String linkLine;
+          while ((linkLine = linkReader.readLine()) != null) {
+            System.out.println(linkLine);
+          }
+        }
+        int linkExitCode = linkProcess.waitFor();
+        if (linkExitCode == 0) {
+          System.out.println("MSI installer created successfully at: " + outputFilePath);
+        } else {
+          System.err.println("Failed to create MSI installer. Linker exit code: " + linkExitCode);
+        }
+      } else {
+        System.err.println("Failed to compile MSI installer. Candle exit code: " + exitCode);
+      }
+    } catch (IOException | InterruptedException e) {
+      System.err.println("Error generating MSI installer: " + e.getMessage());
     }
-
-    public void configureWindows() {
-        System.out.println("Setting up interactive windows for .msi installer.");
-        String licenseKey = "XYZ789";
-        System.out.println("License key entered: " + licenseKey);
-    }
-
-    public void buildPackage() {
-        System.out.println("Building .msi installer package.");
-        System.out.println(".msi installer package built successfully.");
-    }
+  }
 }

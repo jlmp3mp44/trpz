@@ -14,11 +14,9 @@ public class DocumentationServiceImpl implements DocumentationService {
 
     @Override
     public boolean checkLicense(String license) {
-        // Шукаємо документацію за ліцензією
         Documentation documentation = documentationRepository.findByLicense(license)
             .orElseThrow(() -> new RuntimeException("License not found: " + license));
 
-        // Перевірка: якщо поле info містить "valid", ліцензія вважається дійсною
         return documentation.getInfo() != null && documentation.getInfo().contains("valid");
     }
 
