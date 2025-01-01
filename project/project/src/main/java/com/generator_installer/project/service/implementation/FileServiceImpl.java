@@ -22,7 +22,7 @@ public class FileServiceImpl implements FileService {
 
     @Override
     public File getFileById(Integer id) {
-        return fileRepository.findById(id.longValue())
+        return fileRepository.findById((int) id.longValue())
                 .orElseThrow(() -> new RuntimeException("File not found with id: " + id));
     }
 

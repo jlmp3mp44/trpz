@@ -1,7 +1,7 @@
 package com.generator_installer.project.bridge;
-class FileConfigurator extends FileProcessor {
+class FileConvertor extends FileProcessor {
 
-  public FileConfigurator(FileFormatter formatter) {
+  public FileConvertor(FileFormatter formatter) {
     super(formatter);
   }
 
