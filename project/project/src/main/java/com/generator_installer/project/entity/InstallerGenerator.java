@@ -9,6 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 import lombok.Data;
@@ -44,6 +45,9 @@ public class InstallerGenerator {
   @Transient // This field won't be persisted in the database
   private InstallerState state;
 
+  @OneToOne
+  private Documentation documentation;
+
   public InstallerGenerator() {
     this.state = new InitialState(this);
   }
@@ -71,5 +75,25 @@ public class InstallerGenerator {
 
   public String generateInstaller() {
     return state.generateInstaller();
+  }
+
+  public void setFile(File file) {
+    this.file = file;
+  }
+
+  public void setUser(User user) {
+    this.user = user;
+  }
+
+  public void setInstallationOption(String installationOption) {
+    this.installationOption = installationOption;
+  }
+
+  public void setShortcut(String shortcut) {
+    this.shortcut = shortcut;
+  }
+
+  public void setDocumentation(Documentation documentation) {
+    this.documentation = documentation;
   }
 }
